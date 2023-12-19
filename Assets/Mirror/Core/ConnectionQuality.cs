@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace Mirror
+namespace Mirror.Core
 {
     public enum ConnectionQuality : byte
     {

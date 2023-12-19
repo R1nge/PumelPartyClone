@@ -2,7 +2,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace IO.Swagger.Model
+namespace Mirror.Hosting.Edgegap.Models.SDK
 {
     /// <summary>
     ///

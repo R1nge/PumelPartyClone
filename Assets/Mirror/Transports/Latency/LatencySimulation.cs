@@ -9,10 +9,12 @@
 
 using System;
 using System.Collections.Generic;
+using Mirror.Core;
+using Mirror.Core.Tools;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Mirror
+namespace Mirror.Transports.Latency
 {
     struct QueuedMessage
     {

@@ -11,7 +11,7 @@ using UnityEditor;
 using UnityEditor.Build.Reporting;
 using Debug = UnityEngine.Debug;
 
-namespace Edgegap
+namespace Mirror.Hosting.Edgegap.Editor
 {
     internal static class EdgegapBuildUtils
     {

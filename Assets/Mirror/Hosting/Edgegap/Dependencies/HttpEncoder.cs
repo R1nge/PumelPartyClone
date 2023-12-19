@@ -7,8 +7,8 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 
-namespace Edgegap.Codice.
-    Utils // MIRROR CHANGE: namespace Edgegap.* to not collide if anyone has Plastic SCM installed already
+namespace Mirror.Hosting.Edgegap.
+    Dependencies // MIRROR CHANGE: namespace Edgegap.* to not collide if anyone has Plastic SCM installed already
 {
     public class HttpEncoder
     {

@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using Mirror.Core;
+using Mirror.Core.Prediction;
 using UnityEngine;
 
-namespace Mirror
+namespace Mirror.Components.PredictedRigidbody
 {
     struct RigidbodyState : PredictedState
     {

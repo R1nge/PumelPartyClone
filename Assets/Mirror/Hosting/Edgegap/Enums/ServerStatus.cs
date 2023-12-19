@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using IO.Swagger.Model;
+using Mirror.Hosting.Edgegap.Models.SDK;
 using UnityEngine;
 
-namespace Edgegap
+namespace Mirror.Hosting.Edgegap.Enums
 {
     public enum ServerStatus
     {

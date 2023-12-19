@@ -2,7 +2,9 @@
 // usually they set up both server & client.
 // it's cleaner to keep them in one place, instead of only in server / client.
 
-namespace Mirror
+using Mirror.Core.Tools;
+
+namespace Mirror.Core
 {
     public static class HostMode
     {

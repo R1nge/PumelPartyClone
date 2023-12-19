@@ -11,8 +11,9 @@
 
 using System;
 using System.Collections.Generic;
+using Mirror.Core.Tools;
 
-namespace Mirror
+namespace Mirror.Core.Batching
 {
     public class Batcher
     {

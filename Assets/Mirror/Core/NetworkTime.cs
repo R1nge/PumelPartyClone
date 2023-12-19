@@ -6,12 +6,13 @@
 // some users may still be using that.
 
 using System.Runtime.CompilerServices;
+using Mirror.Core.Tools;
 using UnityEngine;
 #if !UNITY_2020_3_OR_NEWER
 using Stopwatch = System.Diagnostics.Stopwatch;
 #endif
 
-namespace Mirror
+namespace Mirror.Core
 {
     /// <summary>Synchronizes server time to clients.</summary>
     public static class NetworkTime

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Services.StateMachine
+namespace _Assets.Scripts.Services.StateMachine
 {
     public class GameStateMachine
     {
@@ -12,6 +12,7 @@ namespace Services.StateMachine
         {
             _states = new Dictionary<GameStateType, IGameState>
             {
+                { GameStateType.DataLoading, gameStatesFactory.CreateDataLoadingState(this) },
                 { GameStateType.Game, gameStatesFactory.CreateGameState(this) }
             };
         }

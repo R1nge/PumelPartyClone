@@ -8,7 +8,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Mirror
+namespace Mirror.Core.LagCompensation
 {
     public struct MinMaxBounds : IEquatable<Bounds>
     {

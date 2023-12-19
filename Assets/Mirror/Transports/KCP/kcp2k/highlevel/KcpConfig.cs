@@ -1,8 +1,9 @@
 // common config struct, instead of passing 10 parameters manually every time.
 
 using System;
+using Mirror.Transports.KCP.kcp2k.kcp;
 
-namespace kcp2k
+namespace Mirror.Transports.KCP.kcp2k.highlevel
 {
     // [Serializable] to show it in Unity inspector.
     // 'class' so we can set defaults easily.

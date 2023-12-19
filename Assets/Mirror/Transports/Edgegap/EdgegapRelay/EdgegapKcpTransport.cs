@@ -5,11 +5,13 @@
 
 using System;
 using System.Text.RegularExpressions;
-using kcp2k;
-using Mirror;
+using Mirror.Core;
+using Mirror.Transports.KCP;
+using Mirror.Transports.KCP.kcp2k.highlevel;
+using Mirror.Transports.KCP.kcp2k.kcp;
 using UnityEngine;
 
-namespace Edgegap
+namespace Mirror.Transports.Edgegap.EdgegapRelay
 {
     [DisallowMultipleComponent]
     public class EdgegapKcpTransport : KcpTransport

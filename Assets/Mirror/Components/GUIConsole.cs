@@ -16,7 +16,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mirror
+namespace Mirror.Components
 {
     struct LogEntry
     {

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace Mirror
+namespace Mirror.Core.Tools
 {
     public class Pool<T>
     {

@@ -1,6 +1,6 @@
 ﻿using VContainer.Unity;
 
-namespace CompositionRoot
+namespace _Assets.Scripts.CompositionRoot
 {
     public class MainMenuLifeTimeScope : LifetimeScope
     {

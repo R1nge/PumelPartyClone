@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Edgegap
+namespace Mirror.Hosting.Edgegap.Models
 {
     //[Obsolete("Use UpdateAppVersionRequest")] // MIRROR CHANGE: commented this out to avoid import warnings
     public struct AppVersionUpdatePatchData

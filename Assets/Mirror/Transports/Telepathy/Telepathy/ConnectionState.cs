@@ -10,7 +10,7 @@
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Telepathy
+namespace Mirror.Transports.Telepathy.Telepathy
 {
     public class ConnectionState
     {

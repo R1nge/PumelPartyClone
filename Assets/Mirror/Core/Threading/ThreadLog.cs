@@ -9,7 +9,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using UnityEngine;
 
-namespace Mirror
+namespace Mirror.Core.Threading
 {
     public static class ThreadLog
     {

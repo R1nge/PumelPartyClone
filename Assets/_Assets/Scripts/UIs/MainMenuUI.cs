@@ -1,8 +1,8 @@
-﻿using Mirror;
+﻿using Mirror.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UIs
+namespace _Assets.Scripts.UIs
 {
     public class MainMenuUI : MonoBehaviour
     {

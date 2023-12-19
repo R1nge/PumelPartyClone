@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Mirror
+namespace Mirror.Core
 {
     /// <summary>Pooled NetworkWriter, automatically returned to pool when using 'using'</summary>
     // TODO make sealed again after removing obsolete NetworkWriterPooled!

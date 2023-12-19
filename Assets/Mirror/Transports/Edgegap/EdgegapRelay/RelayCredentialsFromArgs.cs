@@ -4,7 +4,7 @@
 using System;
 using UnityEngine;
 
-namespace Edgegap
+namespace Mirror.Transports.Edgegap.EdgegapRelay
 {
     public class RelayCredentialsFromArgs : MonoBehaviour
     {

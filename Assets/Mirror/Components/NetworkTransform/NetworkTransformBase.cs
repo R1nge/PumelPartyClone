@@ -18,9 +18,12 @@
 //         buffer for bufferTime but end up closer to the original time
 
 using System.Collections.Generic;
+using Mirror.Core;
+using Mirror.Core.SnapshotInterpolation;
+using Mirror.Core.Tools;
 using UnityEngine;
 
-namespace Mirror
+namespace Mirror.Components.NetworkTransform
 {
     public enum CoordinateSpace
     {

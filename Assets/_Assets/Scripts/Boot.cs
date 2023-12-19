@@ -1,7 +1,18 @@
-﻿using UnityEngine;
+﻿using _Assets.Scripts.Services.StateMachine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 
-public class Boot : MonoBehaviour
+namespace _Assets.Scripts
 {
-    private void Start() => SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
+    public class Boot : MonoBehaviour
+    {
+        [Inject] private GameStateMachine _gameStateMachine;
+
+        private void Start()
+        {
+            _gameStateMachine.SwitchState(GameStateType.DataLoading);
+            SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
+        }
+    }
 }

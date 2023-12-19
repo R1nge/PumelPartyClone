@@ -4,7 +4,7 @@
 
 using System.Runtime.CompilerServices;
 
-namespace Mirror
+namespace Mirror.Core.Tools
 {
     public static class DeltaCompression
     {
