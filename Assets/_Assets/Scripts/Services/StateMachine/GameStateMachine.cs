@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace _Assets.Scripts.Services.StateMachine
 {
@@ -19,6 +20,12 @@ namespace _Assets.Scripts.Services.StateMachine
 
         public void SwitchState(GameStateType gameStateType)
         {
+            if (_currentGameStateType == gameStateType)
+            {
+                Debug.LogError($"Game is already in {_currentGameState} state");
+                return;
+            }
+
             _currentGameState?.Exit();
             _currentGameState = _states[gameStateType];
             _currentGameStateType = gameStateType;
