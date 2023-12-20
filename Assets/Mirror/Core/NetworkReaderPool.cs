@@ -2,9 +2,8 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using Mirror.Core.Tools;
 
-namespace Mirror.Core
+namespace Mirror
 {
     /// <summary>Pool of NetworkReaders to avoid allocations.</summary>
     public static class NetworkReaderPool

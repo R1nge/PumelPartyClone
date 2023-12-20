@@ -1,6 +1,6 @@
 using System;
 
-namespace Mirror.Components.NetworkTransform
+namespace Mirror
 {
     // DEPRECATED 2023-06-15
     [Obsolete(

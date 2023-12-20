@@ -3,9 +3,8 @@
 // https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking
 
 using System.Collections.Generic;
-using Mirror.Core.Tools;
 
-namespace Mirror.Core.LagCompensation
+namespace Mirror
 {
     public static class LagCompensation
     {

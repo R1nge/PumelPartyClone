@@ -1,7 +1,7 @@
 // kcp specific error codes to allow for error switching, localization,
 // translation to Mirror errors, etc.
 
-namespace Mirror.Transports.KCP.kcp2k.highlevel
+namespace kcp2k
 {
     public enum ErrorCode : byte
     {

@@ -8,7 +8,7 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace Mirror.Core.Tools
+namespace Mirror
 {
     public struct TimeSample
     {

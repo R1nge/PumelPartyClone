@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mirror.Components.InterestManagement.SpatialHashing
+namespace Mirror
 {
     // struct to avoid memory indirection. it's accessed a lot.
     public struct Grid2D<T>

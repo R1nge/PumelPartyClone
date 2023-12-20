@@ -3,7 +3,7 @@
 
 using System.Runtime.CompilerServices;
 
-namespace Mirror.Core.Threading
+namespace Mirror
 {
     public static class ConcurrentNetworkWriterPool
     {

@@ -13,11 +13,9 @@
 
 using System;
 using System.IO;
-using Mirror.Core;
-using Mirror.Core.Tools;
 using UnityEngine;
 
-namespace Mirror.Components
+namespace Mirror
 {
     // server -> client
     struct Stats

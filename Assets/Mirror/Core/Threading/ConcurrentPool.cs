@@ -8,7 +8,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 
-namespace Mirror.Core.Threading
+namespace Mirror
 {
     public class ConcurrentPool<T>
     {

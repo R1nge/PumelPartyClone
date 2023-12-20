@@ -4,9 +4,8 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using Mirror.Transports.KCP.kcp2k.kcp;
 
-namespace Mirror.Transports.KCP.kcp2k.highlevel
+namespace kcp2k
 {
     public class KcpClient : KcpPeer
     {

@@ -15,9 +15,10 @@ namespace _Assets.Scripts.Services.Skins
             OnSkinChanged?.Invoke(index);
         }
 
-        public void LoadSkin()
+        public int LoadSkin()
         {
             Debug.Log("Loaded skins data");
+            return _currentSkinIndex;
         }
     }
 }

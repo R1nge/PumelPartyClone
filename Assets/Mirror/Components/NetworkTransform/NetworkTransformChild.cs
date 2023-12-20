@@ -4,7 +4,7 @@
 using System;
 using UnityEngine;
 
-namespace Mirror.Components.NetworkTransform
+namespace Mirror
 {
     // Deprecated 2022-10-25
     [AddComponentMenu("")]

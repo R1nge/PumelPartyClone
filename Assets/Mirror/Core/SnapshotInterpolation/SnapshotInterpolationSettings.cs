@@ -4,7 +4,7 @@
 using System;
 using UnityEngine;
 
-namespace Mirror.Core.SnapshotInterpolation
+namespace Mirror
 {
     // class so we can define defaults easily
     [Serializable]

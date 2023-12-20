@@ -1,10 +1,9 @@
 // simple component that holds match information
 
 using System;
-using Mirror.Core;
 using UnityEngine;
 
-namespace Mirror.Components.InterestManagement.Match
+namespace Mirror
 {
     [DisallowMultipleComponent]
     [AddComponentMenu("Network/ Interest Management/ Match/Network Match")]

@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Mirror.Transports.Telepathy.Telepathy
+namespace Telepathy
 {
     public static class Log
     {

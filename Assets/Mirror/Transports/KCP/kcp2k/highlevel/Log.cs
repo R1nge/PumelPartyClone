@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Mirror.Transports.KCP.kcp2k.highlevel
+namespace kcp2k
 {
     public static class Log
     {

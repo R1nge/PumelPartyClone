@@ -6,9 +6,8 @@
 using System;
 using System.Diagnostics;
 using System.Net.Sockets;
-using Mirror.Transports.KCP.kcp2k.kcp;
 
-namespace Mirror.Transports.KCP.kcp2k.highlevel
+namespace kcp2k
 {
     public abstract class KcpPeer
     {

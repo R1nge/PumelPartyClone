@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mirror.Transports.KCP.kcp2k.kcp
+namespace kcp2k
 {
     public class Kcp
     {

@@ -7,7 +7,7 @@
 
 using Mono.CecilX;
 
-namespace Mirror.Editor.Weaver
+namespace Mirror.Weaver
 {
     public static class Resolvers
     {

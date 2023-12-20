@@ -7,7 +7,7 @@
 
 using Mono.CecilX;
 
-namespace Mirror.Editor.Weaver.EntryPointILPostProcessor
+namespace Mirror.Weaver
 {
     internal class ILPostProcessorReflectionImporterProvider : IReflectionImporterProvider
     {

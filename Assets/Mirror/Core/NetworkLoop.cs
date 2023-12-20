@@ -30,7 +30,7 @@ using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.PlayerLoop;
 
-namespace Mirror.Core
+namespace Mirror
 {
     public static class NetworkLoop
     {

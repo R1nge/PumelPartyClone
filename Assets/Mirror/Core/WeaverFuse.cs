@@ -7,7 +7,7 @@
 // however, issues could still stop the weaving from running at all.
 // WeaverFuse can check if it actually ran.
 
-namespace Mirror.Core
+namespace Mirror
 {
     public static class WeaverFuse
     {

@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Mirror.Core.Tools
+namespace Mirror
 {
     public struct ExponentialMovingAverage
     {

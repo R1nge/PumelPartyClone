@@ -14,7 +14,7 @@ using System;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Mirror.Transports.Telepathy.Telepathy
+namespace Telepathy
 {
     public static class ThreadFunctions
     {

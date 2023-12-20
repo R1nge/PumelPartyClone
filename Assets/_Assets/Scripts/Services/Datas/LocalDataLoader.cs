@@ -4,16 +4,24 @@ namespace _Assets.Scripts.Services.Datas
 {
     public class LocalDataLoader
     {
+        private readonly NicknameService _nicknameService;
         private readonly SkinService _skinService;
 
-        public LocalDataLoader(SkinService skinService)
+        private LocalDataLoader(SkinService skinService, NicknameService nicknameService)
         {
             _skinService = skinService;
+            _nicknameService = nicknameService;
         }
+
+        public LocalPlayerData LocalPlayerData { get; private set; }
 
         public void Load()
         {
-            _skinService.LoadSkin();
+            LocalPlayerData = new LocalPlayerData
+            {
+                SkinIndex = _skinService.LoadSkin(),
+                Nickname = _nicknameService.LoadNickname()
+            };
         }
 
         public void Save()

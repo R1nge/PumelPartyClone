@@ -11,9 +11,8 @@
 
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Mirror.Core.Tools;
 
-namespace Mirror.Core.SnapshotInterpolation
+namespace Mirror
 {
     public static class SortedListExtensions
     {

@@ -1,21 +1,21 @@
 using System.Collections.Generic;
-using Mirror.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace Mirror.Components.InterestManagement.Scene
+namespace Mirror
 {
     [AddComponentMenu("Network/ Interest Management/ Scene/Scene Interest Management")]
-    public class SceneInterestManagement : Core.InterestManagement
+    public class SceneInterestManagement : InterestManagement
     {
-        readonly Dictionary<NetworkIdentity, UnityEngine.SceneManagement.Scene> lastObjectScene =
-            new Dictionary<NetworkIdentity, UnityEngine.SceneManagement.Scene>();
+        readonly Dictionary<NetworkIdentity, Scene> lastObjectScene =
+            new Dictionary<NetworkIdentity, Scene>();
 
         // Use Scene instead of string scene.name because when additively
         // loading multiples of a subscene the name won't be unique
-        readonly Dictionary<UnityEngine.SceneManagement.Scene, HashSet<NetworkIdentity>> sceneObjects =
-            new Dictionary<UnityEngine.SceneManagement.Scene, HashSet<NetworkIdentity>>();
+        readonly Dictionary<Scene, HashSet<NetworkIdentity>> sceneObjects =
+            new Dictionary<Scene, HashSet<NetworkIdentity>>();
 
-        HashSet<UnityEngine.SceneManagement.Scene> dirtyScenes = new HashSet<UnityEngine.SceneManagement.Scene>();
+        HashSet<Scene> dirtyScenes = new HashSet<Scene>();
 
         // internal so we can update from tests
         [ServerCallback]
@@ -27,10 +27,10 @@ namespace Mirror.Components.InterestManagement.Scene
             //     add new to dirty
             foreach (NetworkIdentity identity in NetworkServer.spawned.Values)
             {
-                if (!lastObjectScene.TryGetValue(identity, out UnityEngine.SceneManagement.Scene currentScene))
+                if (!lastObjectScene.TryGetValue(identity, out Scene currentScene))
                     continue;
 
-                UnityEngine.SceneManagement.Scene newScene = identity.gameObject.scene;
+                Scene newScene = identity.gameObject.scene;
                 if (newScene == currentScene)
                     continue;
 
@@ -56,7 +56,7 @@ namespace Mirror.Components.InterestManagement.Scene
             }
 
             // rebuild all dirty scenes
-            foreach (UnityEngine.SceneManagement.Scene dirtyScene in dirtyScenes)
+            foreach (Scene dirtyScene in dirtyScenes)
                 RebuildSceneObservers(dirtyScene);
 
             dirtyScenes.Clear();
@@ -65,7 +65,7 @@ namespace Mirror.Components.InterestManagement.Scene
         [ServerCallback]
         public override void OnSpawned(NetworkIdentity identity)
         {
-            UnityEngine.SceneManagement.Scene currentScene = identity.gameObject.scene;
+            Scene currentScene = identity.gameObject.scene;
             lastObjectScene[identity] = currentScene;
             // Debug.Log($"SceneInterestManagement.OnSpawned({identity.name}) currentScene: {currentScene}");
             if (!sceneObjects.TryGetValue(currentScene, out HashSet<NetworkIdentity> objects))
@@ -84,7 +84,7 @@ namespace Mirror.Components.InterestManagement.Scene
             // Multiple objects could be destroyed in same frame and we don't
             // want to rebuild for each one...let Update do it once.
             // We must add the current scene to dirtyScenes for Update to rebuild it.
-            if (lastObjectScene.TryGetValue(identity, out UnityEngine.SceneManagement.Scene currentScene))
+            if (lastObjectScene.TryGetValue(identity, out Scene currentScene))
             {
                 lastObjectScene.Remove(identity);
                 if (sceneObjects.TryGetValue(currentScene, out HashSet<NetworkIdentity> objects) &&
@@ -93,7 +93,7 @@ namespace Mirror.Components.InterestManagement.Scene
             }
         }
 
-        void RebuildSceneObservers(UnityEngine.SceneManagement.Scene scene)
+        void RebuildSceneObservers(Scene scene)
         {
             foreach (NetworkIdentity netIdentity in sceneObjects[scene])
                 if (netIdentity != null)

@@ -25,7 +25,7 @@
 
 using System.Runtime.CompilerServices;
 
-namespace Mirror.Core.Tools
+namespace Mirror
 {
     public static class AccurateInterval
     {

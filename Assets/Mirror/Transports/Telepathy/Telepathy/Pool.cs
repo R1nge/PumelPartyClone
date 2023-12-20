@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mirror.Transports.Telepathy.Telepathy
+namespace Telepathy
 {
     public class Pool<T>
     {

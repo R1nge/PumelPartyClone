@@ -8,7 +8,7 @@ using System.Threading;
 using UnityEngine.Profiling;
 using Debug = UnityEngine.Debug;
 
-namespace Mirror.Core.Threading
+namespace Mirror
 {
     public class WorkerThread
     {

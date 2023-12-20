@@ -4,7 +4,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Mirror.Core.Tools
+namespace Mirror
 {
     /// <summary>Functions to Compress Quaternions and Floats</summary>
     public static class Compression

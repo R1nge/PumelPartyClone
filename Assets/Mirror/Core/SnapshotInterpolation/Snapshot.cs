@@ -3,7 +3,7 @@
 // NOTE: we use '<T>' and 'where T : Snapshot' to avoid boxing.
 //       List<Snapshot> would cause allocations through boxing.
 
-namespace Mirror.Core.SnapshotInterpolation
+namespace Mirror
 {
     public interface Snapshot
     {

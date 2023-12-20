@@ -2,12 +2,9 @@
 
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Mirror.Core;
-using Mirror.Core.SnapshotInterpolation;
-using Mirror.Core.Tools;
 using UnityEngine;
 
-namespace Mirror.Components.NetworkTransform
+namespace Mirror
 {
     [AddComponentMenu("Network/Network Transform (Reliable)")]
     public class NetworkTransformReliable : NetworkTransformBase

@@ -8,12 +8,9 @@ using System;
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using Mirror.Core;
-using Mirror.Core.Threading;
-using Mirror.Core.Tools;
 using UnityEngine;
 
-namespace Mirror.Transports.Threaded
+namespace Mirror
 {
     // buffered events for main thread
     enum ClientMainEventType

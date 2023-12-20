@@ -1,4 +1,4 @@
-﻿using Mirror.Core;
+﻿using Mirror;
 
 namespace _Assets.Scripts.Players
 {

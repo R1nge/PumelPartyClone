@@ -3,13 +3,12 @@
 // => scales way higher
 
 using System.Collections.Generic;
-using Mirror.Core;
 using UnityEngine;
 
-namespace Mirror.Components.InterestManagement.SpatialHashing
+namespace Mirror
 {
     [AddComponentMenu("Network/ Interest Management/ Spatial Hash/Spatial Hashing Interest Management")]
-    public class SpatialHashingInterestManagement : Core.InterestManagement
+    public class SpatialHashingInterestManagement : InterestManagement
     {
         public enum CheckMethod
         {
