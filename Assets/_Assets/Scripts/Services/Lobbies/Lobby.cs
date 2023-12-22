@@ -8,9 +8,8 @@ namespace _Assets.Scripts.Services.Lobbies
 {
     public class Lobby
     {
-        private readonly Dictionary<ulong, LobbyPlayerData> _players = new();
-
-        public IReadOnlyList<LobbyPlayerData> Players => _players.Values.ToList();
+        private readonly Dictionary<ulong, LobbyPlayerData> _players = new(8);
+        public IReadOnlyList<LobbyPlayerData> Players => _players.Values.OrderBy(data => data.ConnectionId).ToList();
         public event Action<ulong> OnPlayerConnected;
         public event Action<ulong> OnPlayerDisconnected;
 

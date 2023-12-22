@@ -26,6 +26,7 @@ namespace _Assets.Scripts.Services.Skins
             OnBodyChanged?.Invoke(index);
         }
 
+        //TODO: create a struct for the skin data?
         public (int, int) LoadSkin()
         {
             Debug.Log("Loaded skins data");

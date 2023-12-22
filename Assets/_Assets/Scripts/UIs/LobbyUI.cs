@@ -42,25 +42,23 @@ namespace _Assets.Scripts.UIs
         {
             for (int i = 0; i < lobbyCharactersTopBar.Length; i++)
             {
-                lobbyCharactersTopBar[i].SetNickname(String.Empty);
-            }
-
-            for (int i = 0; i < _lobby.Players.Count; i++)
-            {
-                var nickname = _lobby.Players[i].Nickname;
-                lobbyCharactersTopBar[i].SetNickname(nickname);
-                UpdateTopBarClientRpc(nickname, i);
+                if (i < _lobby.Players.Count)
+                {
+                    var nickname = _lobby.Players[i].Nickname;
+                    lobbyCharactersTopBar[i].SetNickname(nickname);
+                    UpdateTopBarClientRpc(nickname, i);
+                }
+                else
+                {
+                    lobbyCharactersTopBar[i].SetNickname(string.Empty);
+                    UpdateTopBarClientRpc(string.Empty, i);
+                }
             }
         }
 
         [ClientRpc]
         private void UpdateTopBarClientRpc(string nickname, int index)
         {
-            for (int i = lobbyCharactersTopBar.Length - 1; i >= index; i--)
-            {
-                lobbyCharactersTopBar[i].SetNickname(String.Empty);
-            }
-
             lobbyCharactersTopBar[index].SetNickname(nickname);
         }
 
