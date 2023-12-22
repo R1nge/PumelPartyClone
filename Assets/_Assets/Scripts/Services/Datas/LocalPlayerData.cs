@@ -5,12 +5,14 @@ namespace _Assets.Scripts.Services.Datas
     [Serializable]
     public struct LocalPlayerData
     {
-        public int SkinIndex;
+        public int HeadSkinIndex;
+        public int BodySkinIndex;
         public string Nickname;
 
-        public LocalPlayerData(int skinIndex, string nickname)
+        public LocalPlayerData(int headSkinIndex, int bodySkinIndex, string nickname)
         {
-            SkinIndex = skinIndex;
+            HeadSkinIndex = headSkinIndex;
+            BodySkinIndex = bodySkinIndex;
             Nickname = nickname;
         }
     }

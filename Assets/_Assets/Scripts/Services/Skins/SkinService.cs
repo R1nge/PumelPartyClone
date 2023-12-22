@@ -3,22 +3,33 @@ using UnityEngine;
 
 namespace _Assets.Scripts.Services.Skins
 {
-    public class SkinService
+    public class SkinService : MonoBehaviour
     {
-        private int _currentSkinIndex;
-        public int CurrentSkinIndex => _currentSkinIndex;
-        public event Action<int> OnSkinChanged;
+        [SerializeField] private SkinPartSO[] heads;
+        [SerializeField] private SkinPartSO[] bodies;
+        private int _currentBodyIndex;
+        private int _currentHeadIndex;
+        public int CurrentHeadIndex => _currentHeadIndex;
+        public int CurrentBodyIndex => _currentBodyIndex;
+        public event Action<int> OnHeadChanged;
+        public event Action<int> OnBodyChanged;
 
-        public void ChangeSkin(int index)
+        public void ChangeHead(int index)
         {
-            _currentSkinIndex = index;
-            OnSkinChanged?.Invoke(index);
+            _currentHeadIndex = index;
+            OnHeadChanged?.Invoke(index);
         }
 
-        public int LoadSkin()
+        public void ChangeBody(int index)
+        {
+            _currentHeadIndex = index;
+            OnBodyChanged?.Invoke(index);
+        }
+
+        public (int, int) LoadSkin()
         {
             Debug.Log("Loaded skins data");
-            return _currentSkinIndex;
+            return (_currentHeadIndex, _currentBodyIndex);
         }
     }
 }

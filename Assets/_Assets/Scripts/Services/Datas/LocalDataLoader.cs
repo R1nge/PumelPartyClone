@@ -17,9 +17,12 @@ namespace _Assets.Scripts.Services.Datas
 
         public void Load()
         {
+            var skinData = _skinService.LoadSkin();
+
             LocalPlayerData = new LocalPlayerData
             {
-                SkinIndex = _skinService.LoadSkin(),
+                HeadSkinIndex = skinData.Item1,
+                BodySkinIndex = skinData.Item2,
                 Nickname = _nicknameService.LoadNickname()
             };
         }

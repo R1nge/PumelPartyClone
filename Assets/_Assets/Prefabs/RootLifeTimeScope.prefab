@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 309187484894772545}
   - component: {fileID: 2522775608355499485}
+  - component: {fileID: 2728004180322952329}
   m_Layer: 0
   m_Name: RootLifeTimeScope
   m_TagString: Untagged
@@ -48,3 +49,20 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  skinService: {fileID: 2728004180322952329}
+--- !u!114 &2728004180322952329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5944184834743084966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de54207d63f44e4a533b22523aa986d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heads:
+  - {fileID: 11400000, guid: 988d43e5761a548418c3c53f209fa47c, type: 2}
+  bodies:
+  - {fileID: 11400000, guid: 9f835ddb016aded47a8a1acd80de6ba6, type: 2}

@@ -8,6 +8,7 @@ namespace _Assets.Scripts.Services.Lobbies
 {
     public class LobbySpawner : NetworkBehaviour
     {
+        [SerializeField] private Transform parent;
         [SerializeField] private NetworkObject lobbyPlayerPrefab;
         [Inject] private Lobby _lobby;
         [Inject] private LocalDataLoader _localDataLoader;
@@ -23,7 +24,7 @@ namespace _Assets.Scripts.Services.Lobbies
                 {
                     ConnectionId = NetworkManager.Singleton.LocalClientId,
                     Nickname = _localDataLoader.LocalPlayerData.Nickname,
-                    SkinIndex = _localDataLoader.LocalPlayerData.SkinIndex
+                    HeadSkinIndex = _localDataLoader.LocalPlayerData.BodySkinIndex
                 };
 
                 SpawnLobbyPlayerServerRpc(lobbyPlayerData);
@@ -48,13 +49,13 @@ namespace _Assets.Scripts.Services.Lobbies
         {
             var data = _localDataLoader.LocalPlayerData;
 
-            Debug.LogError(data.Nickname + " " + data.SkinIndex);
+            Debug.LogError(data.Nickname + " " + data.BodySkinIndex);
 
             var lobbyPlayerData = new LobbyPlayerData
             {
                 ConnectionId = NetworkManager.Singleton.LocalClientId,
                 Nickname = data.Nickname,
-                SkinIndex = data.SkinIndex
+                HeadSkinIndex = data.BodySkinIndex
             };
 
             SpawnLobbyPlayerServerRpc(lobbyPlayerData);
@@ -63,11 +64,11 @@ namespace _Assets.Scripts.Services.Lobbies
         [ServerRpc(RequireOwnership = false)]
         private void SpawnLobbyPlayerServerRpc(LobbyPlayerData lobbyPlayerData)
         {
-            var lobbyPlayer = _objectResolver.Instantiate(lobbyPlayerPrefab);
-            lobbyPlayer.SpawnWithOwnership(lobbyPlayerData.ConnectionId);
             _lobby.AddPlayer(lobbyPlayerData);
+            //var lobbyPlayer = _objectResolver.Instantiate(lobbyPlayerPrefab, parent);
+            //lobbyPlayer.SpawnWithOwnership(lobbyPlayerData.ConnectionId);
             Debug.LogError("Spawned player with data: ID: " + lobbyPlayerData.ConnectionId + " Nickname: " +
-                           lobbyPlayerData.Nickname + " SkinIndex: " + lobbyPlayerData.SkinIndex);
+                           lobbyPlayerData.Nickname + " SkinIndex: " + lobbyPlayerData.HeadSkinIndex);
         }
     }
 }
