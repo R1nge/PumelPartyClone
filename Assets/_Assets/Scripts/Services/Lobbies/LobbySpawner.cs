@@ -1,5 +1,5 @@
 ﻿using _Assets.Scripts.Services.Datas;
-using Mirror;
+using Unity.Netcode;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -8,64 +8,66 @@ namespace _Assets.Scripts.Services.Lobbies
 {
     public class LobbySpawner : NetworkBehaviour
     {
-        [SerializeField] private GameObject lobbyPlayerPrefab;
+        [SerializeField] private NetworkObject lobbyPlayerPrefab;
         [Inject] private Lobby _lobby;
         [Inject] private LocalDataLoader _localDataLoader;
         [Inject] private IObjectResolver _objectResolver;
 
-        public override void OnStartServer()
-        {
-            base.OnStartServer();
-            NetworkServer.OnConnectedEvent += OnClientConnect;
-            NetworkServer.RegisterHandler<PlayerConnectedMessage>(OnCreateCharacter);
-        }
+        private void Awake() => NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
 
-        private void OnClientConnect(NetworkConnectionToClient client)
+        public override void OnNetworkSpawn()
         {
-            PlayerConnectedMessage playerConnectedMessage = new PlayerConnectedMessage
+            if (IsServer)
             {
-                connectionId = client.connectionId,
-                nickname = $"Joe {Random.Range(0, 1000)}",
-                skinIndex = 0
-            };
+                var lobbyPlayerData = new LobbyPlayerData
+                {
+                    ConnectionId = NetworkManager.Singleton.LocalClientId,
+                    Nickname = _localDataLoader.LocalPlayerData.Nickname,
+                    SkinIndex = _localDataLoader.LocalPlayerData.SkinIndex
+                };
 
-            NetworkClient.Send(playerConnectedMessage);
-        }
-
-        private void OnCreateCharacter(NetworkConnectionToClient conn, PlayerConnectedMessage playerConnectedMessage)
-        {
-            var player = _objectResolver.Instantiate(lobbyPlayerPrefab);
-            NetworkServer.Spawn(player, conn);
-            AddPlayerData(playerConnectedMessage.connectionId, playerConnectedMessage.nickname,
-                playerConnectedMessage.skinIndex);
-        }
-
-        private void AddPlayerData(int connectionId, string nickname, int skinIndex)
-        {
-            var lobbyData = new LobbyPlayerData
-            {
-                ConnectionId = connectionId,
-                Nickname = nickname,
-                SkinIndex = skinIndex
-            };
-
-            _lobby.AddPlayer(lobbyData.ConnectionId, lobbyData.Nickname, lobbyData.SkinIndex);
-            Debug.LogError(
-                $"Client connected: {lobbyData.ConnectionId}, nickname: {lobbyData.Nickname}, skin: {lobbyData.SkinIndex}");
-        }
-
-        public struct PlayerConnectedMessage : NetworkMessage
-        {
-            public int connectionId;
-            public string nickname;
-            public int skinIndex;
-
-            public PlayerConnectedMessage(int connectionId, string nickname, int skinIndex)
-            {
-                this.connectionId = connectionId;
-                this.nickname = nickname;
-                this.skinIndex = skinIndex;
+                SpawnLobbyPlayerServerRpc(lobbyPlayerData);
             }
+        }
+
+        private void ClientConnected(ulong clientId)
+        {
+            var rpc = new ClientRpcParams
+            {
+                Send = new ClientRpcSendParams
+                {
+                    TargetClientIds = new[] { clientId }
+                }
+            };
+
+            GetLocalDataClientRpc(rpc);
+        }
+
+        [ClientRpc]
+        private void GetLocalDataClientRpc(ClientRpcParams clientRpcParams)
+        {
+            var data = _localDataLoader.LocalPlayerData;
+
+            Debug.LogError(data.Nickname + " " + data.SkinIndex);
+
+            var lobbyPlayerData = new LobbyPlayerData
+            {
+                ConnectionId = NetworkManager.Singleton.LocalClientId,
+                Nickname = data.Nickname,
+                SkinIndex = data.SkinIndex
+            };
+
+            SpawnLobbyPlayerServerRpc(lobbyPlayerData);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void SpawnLobbyPlayerServerRpc(LobbyPlayerData lobbyPlayerData)
+        {
+            var lobbyPlayer = _objectResolver.Instantiate(lobbyPlayerPrefab);
+            lobbyPlayer.SpawnWithOwnership(lobbyPlayerData.ConnectionId);
+            _lobby.AddPlayer(lobbyPlayerData);
+            Debug.LogError("Spawned player with data: ID: " + lobbyPlayerData.ConnectionId + " Nickname: " +
+                           lobbyPlayerData.Nickname + " SkinIndex: " + lobbyPlayerData.SkinIndex);
         }
     }
 }

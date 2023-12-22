@@ -1,5 +1,6 @@
-﻿using Mirror;
+﻿using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace _Assets.Scripts.UIs
@@ -14,8 +15,12 @@ namespace _Assets.Scripts.UIs
             join.onClick.AddListener(Join);
         }
 
-        private void Host() => NetworkManager.singleton.StartHost();
+        private void Host()
+        {
+            NetworkManager.Singleton.StartHost();
+            NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
+        }
 
-        private void Join() => NetworkManager.singleton.StartClient();
+        private void Join() => NetworkManager.Singleton.StartClient();
     }
 }

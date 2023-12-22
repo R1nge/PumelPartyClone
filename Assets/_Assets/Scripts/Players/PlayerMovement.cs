@@ -1,4 +1,4 @@
-﻿using Mirror;
+﻿using Unity.Netcode;
 
 namespace _Assets.Scripts.Players
 {

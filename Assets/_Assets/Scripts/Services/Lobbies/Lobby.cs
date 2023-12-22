@@ -7,23 +7,23 @@ namespace _Assets.Scripts.Services.Lobbies
 {
     public class Lobby
     {
-        private readonly Dictionary<int, LobbyPlayerData> _players = new();
-        public event Action<int> OnPlayerConnected;
-        public event Action<int> OnPlayerDisconnected;
+        private readonly Dictionary<ulong, LobbyPlayerData> _players = new();
+        public event Action<ulong> OnPlayerConnected;
+        public event Action<ulong> OnPlayerDisconnected;
 
-        public void AddPlayer(int connectionId, string nickname, int skinIndex)
+        public void AddPlayer(LobbyPlayerData playerData)
         {
-            if (_players.ContainsKey(connectionId))
+            if (_players.ContainsKey(playerData.ConnectionId))
             {
-                Debug.LogError($"ID: {connectionId} already exists");
+                Debug.LogError($"ID: {playerData.ConnectionId} already exists");
                 return;
             }
 
-            _players.Add(connectionId, new LobbyPlayerData(connectionId, nickname, skinIndex));
-            OnPlayerConnected?.Invoke(connectionId);
+            _players.Add(playerData.ConnectionId, playerData);
+            OnPlayerConnected?.Invoke(playerData.ConnectionId);
         }
 
-        public void RemovePlayer(int connectionId)
+        public void RemovePlayer(ulong connectionId)
         {
             _players.Remove(connectionId);
             OnPlayerDisconnected?.Invoke(connectionId);
