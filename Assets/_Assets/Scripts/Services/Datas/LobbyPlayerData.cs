@@ -27,7 +27,7 @@ namespace _Assets.Scripts.Services.Datas
         {
             serializer.SerializeValue(ref ConnectionId);
             serializer.SerializeValue(ref Nickname);
-            serializer.SerializeValue(ref SkinData.HeadIndex);
+            serializer.SerializeValue(ref SkinData.HatIndex);
             serializer.SerializeValue(ref SkinData.BodyIndex);
         }
 

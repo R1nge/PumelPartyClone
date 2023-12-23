@@ -2,7 +2,6 @@
 using Unity.Netcode;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace _Assets.Scripts.Services.Lobbies
 {
@@ -49,8 +48,6 @@ namespace _Assets.Scripts.Services.Lobbies
         {
             var data = _localDataLoader.LocalPlayerData;
 
-            Debug.LogError(data.Nickname + " Head: " + data.SkinData.HeadIndex + " Body: " + data.SkinData.BodyIndex);
-
             var lobbyPlayerData = new LobbyPlayerData
             {
                 ConnectionId = NetworkManager.Singleton.LocalClientId,
@@ -68,7 +65,7 @@ namespace _Assets.Scripts.Services.Lobbies
             //var lobbyPlayer = _objectResolver.Instantiate(lobbyPlayerPrefab, parent);
             //lobbyPlayer.SpawnWithOwnership(lobbyPlayerData.ConnectionId);
             Debug.LogError("Spawned player with data: ID: " + lobbyPlayerData.ConnectionId + " Nickname: " +
-                           lobbyPlayerData.Nickname + "Head: " + lobbyPlayerData.SkinData.HeadIndex + " Body: " +
+                           lobbyPlayerData.Nickname + "Hat: " + lobbyPlayerData.SkinData.HatIndex + " Body: " +
                            lobbyPlayerData.SkinData.BodyIndex);
         }
     }

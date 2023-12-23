@@ -8,14 +8,14 @@ namespace _Assets.Scripts.Services.Skins
         [SerializeField] private SkinPartSO[] heads;
         [SerializeField] private SkinPartSO[] bodies;
         private SkinData _currentSkin;
-        public int CurrentHeadIndex => _currentSkin.HeadIndex;
+        public int CurrentHatIndex => _currentSkin.HatIndex;
         public int CurrentBodyIndex => _currentSkin.BodyIndex;
         public event Action<int> OnHeadChanged;
         public event Action<int> OnBodyChanged;
 
-        public void ChangeHead(int index)
+        public void ChangeHat(int index)
         {
-            _currentSkin.HeadIndex = index;
+            _currentSkin.HatIndex = index;
             OnHeadChanged?.Invoke(index);
         }
 
@@ -31,7 +31,7 @@ namespace _Assets.Scripts.Services.Skins
 
             var data = new SkinData
             {
-                HeadIndex = _currentSkin.HeadIndex,
+                HatIndex = _currentSkin.HatIndex,
                 BodyIndex = _currentSkin.BodyIndex
             };
 
@@ -40,12 +40,12 @@ namespace _Assets.Scripts.Services.Skins
 
         public struct SkinData
         {
-            public int HeadIndex;
+            public int HatIndex;
             public int BodyIndex;
 
-            public SkinData(int headIndex, int bodyIndex)
+            public SkinData(int hatIndex, int bodyIndex)
             {
-                HeadIndex = headIndex;
+                HatIndex = hatIndex;
                 BodyIndex = bodyIndex;
             }
         }
