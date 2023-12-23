@@ -18,7 +18,10 @@ namespace _Assets.Scripts.Services.Lobbies
         public override void OnDestroy()
         {
             base.OnDestroy();
-            NetworkManager.Singleton.OnClientConnectedCallback -= ClientConnected;
+            if (NetworkManager.Singleton)
+            {
+                NetworkManager.Singleton.OnClientConnectedCallback -= ClientConnected;
+            }
         }
 
         public override void OnNetworkSpawn()

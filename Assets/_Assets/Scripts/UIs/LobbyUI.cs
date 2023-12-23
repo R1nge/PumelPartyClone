@@ -27,8 +27,12 @@ namespace _Assets.Scripts.UIs
             base.OnDestroy();
             _lobby.OnPlayerConnected -= UpdateTopBar;
             _lobby.OnPlayerDisconnected -= UpdateTopBar;
-            NetworkManager.Singleton.OnClientDisconnectCallback -= DisconnectServerRpc;
             disconnect.onClick.RemoveAllListeners();
+
+            if (NetworkManager.Singleton)
+            {
+                NetworkManager.Singleton.OnClientDisconnectCallback -= DisconnectServerRpc;
+            }
         }
 
         private void Disconnect()
