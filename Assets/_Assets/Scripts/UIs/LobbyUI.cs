@@ -16,11 +16,9 @@ namespace _Assets.Scripts.UIs
 
         private void Awake()
         {
-            NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectServerRpc;
-
             _lobby.OnPlayerConnected += UpdateTopBar;
             _lobby.OnPlayerDisconnected += UpdateTopBar;
-
+            NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectServerRpc;
             disconnect.onClick.AddListener(Disconnect);
         }
 
