@@ -15,6 +15,12 @@ namespace _Assets.Scripts.Services.Lobbies
 
         private void Awake() => NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
 
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            NetworkManager.Singleton.OnClientConnectedCallback -= ClientConnected;
+        }
+
         public override void OnNetworkSpawn()
         {
             if (IsServer)

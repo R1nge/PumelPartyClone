@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,12 @@ namespace _Assets.Scripts.UIs
         {
             host.onClick.AddListener(Host);
             join.onClick.AddListener(Join);
+        }
+
+        private void OnDestroy()
+        {
+            host.onClick.RemoveAllListeners();
+            join.onClick.RemoveAllListeners();
         }
 
         private void Host()
