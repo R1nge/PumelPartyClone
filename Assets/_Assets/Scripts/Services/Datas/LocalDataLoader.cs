@@ -21,8 +21,7 @@ namespace _Assets.Scripts.Services.Datas
 
             LocalPlayerData = new LocalPlayerData
             {
-                HeadSkinIndex = skinData.Item1,
-                BodySkinIndex = skinData.Item2,
+                SkinData = skinData,
                 Nickname = _nicknameService.LoadNickname()
             };
         }

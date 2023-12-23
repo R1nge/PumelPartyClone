@@ -46,11 +46,13 @@ namespace _Assets.Scripts.UIs
                 {
                     var nickname = _lobby.Players[i].Nickname;
                     lobbyCharactersTopBar[i].SetNickname(nickname);
+                    lobbyCharactersTopBar[i].gameObject.SetActive(true);
                     UpdateTopBarClientRpc(nickname, i);
                 }
                 else
                 {
                     lobbyCharactersTopBar[i].SetNickname(string.Empty);
+                    lobbyCharactersTopBar[i].gameObject.SetActive(false);
                     UpdateTopBarClientRpc(string.Empty, i);
                 }
             }
@@ -60,6 +62,7 @@ namespace _Assets.Scripts.UIs
         private void UpdateTopBarClientRpc(string nickname, int index)
         {
             lobbyCharactersTopBar[index].SetNickname(nickname);
+            lobbyCharactersTopBar[index].gameObject.SetActive(nickname != string.Empty);
         }
 
         public override void OnNetworkSpawn() => start.gameObject.SetActive(IsServer);

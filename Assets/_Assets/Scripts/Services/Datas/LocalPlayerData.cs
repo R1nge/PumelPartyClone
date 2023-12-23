@@ -1,18 +1,17 @@
 ﻿using System;
+using _Assets.Scripts.Services.Skins;
 
 namespace _Assets.Scripts.Services.Datas
 {
     [Serializable]
     public struct LocalPlayerData
     {
-        public int HeadSkinIndex;
-        public int BodySkinIndex;
         public string Nickname;
+        public SkinService.SkinData SkinData;
 
-        public LocalPlayerData(int headSkinIndex, int bodySkinIndex, string nickname)
+        public LocalPlayerData(SkinService.SkinData skinData, string nickname)
         {
-            HeadSkinIndex = headSkinIndex;
-            BodySkinIndex = bodySkinIndex;
+            SkinData = skinData;
             Nickname = nickname;
         }
     }

@@ -24,7 +24,7 @@ namespace _Assets.Scripts.Services.Lobbies
                 {
                     ConnectionId = NetworkManager.Singleton.LocalClientId,
                     Nickname = _localDataLoader.LocalPlayerData.Nickname,
-                    HeadSkinIndex = _localDataLoader.LocalPlayerData.BodySkinIndex
+                    SkinData = _localDataLoader.LocalPlayerData.SkinData
                 };
 
                 SpawnLobbyPlayerServerRpc(lobbyPlayerData);
@@ -49,13 +49,13 @@ namespace _Assets.Scripts.Services.Lobbies
         {
             var data = _localDataLoader.LocalPlayerData;
 
-            Debug.LogError(data.Nickname + " " + data.BodySkinIndex);
+            Debug.LogError(data.Nickname + " Head: " + data.SkinData.HeadIndex + " Body: " + data.SkinData.BodyIndex);
 
             var lobbyPlayerData = new LobbyPlayerData
             {
                 ConnectionId = NetworkManager.Singleton.LocalClientId,
                 Nickname = data.Nickname,
-                HeadSkinIndex = data.BodySkinIndex
+                SkinData = data.SkinData
             };
 
             SpawnLobbyPlayerServerRpc(lobbyPlayerData);
@@ -68,7 +68,8 @@ namespace _Assets.Scripts.Services.Lobbies
             //var lobbyPlayer = _objectResolver.Instantiate(lobbyPlayerPrefab, parent);
             //lobbyPlayer.SpawnWithOwnership(lobbyPlayerData.ConnectionId);
             Debug.LogError("Spawned player with data: ID: " + lobbyPlayerData.ConnectionId + " Nickname: " +
-                           lobbyPlayerData.Nickname + " SkinIndex: " + lobbyPlayerData.HeadSkinIndex);
+                           lobbyPlayerData.Nickname + "Head: " + lobbyPlayerData.SkinData.HeadIndex + " Body: " +
+                           lobbyPlayerData.SkinData.BodyIndex);
         }
     }
 }

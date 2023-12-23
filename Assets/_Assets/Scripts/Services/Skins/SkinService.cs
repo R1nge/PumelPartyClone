@@ -7,30 +7,47 @@ namespace _Assets.Scripts.Services.Skins
     {
         [SerializeField] private SkinPartSO[] heads;
         [SerializeField] private SkinPartSO[] bodies;
-        private int _currentBodyIndex;
-        private int _currentHeadIndex;
-        public int CurrentHeadIndex => _currentHeadIndex;
-        public int CurrentBodyIndex => _currentBodyIndex;
+        private SkinData _currentSkin;
+        public int CurrentHeadIndex => _currentSkin.HeadIndex;
+        public int CurrentBodyIndex => _currentSkin.BodyIndex;
         public event Action<int> OnHeadChanged;
         public event Action<int> OnBodyChanged;
 
         public void ChangeHead(int index)
         {
-            _currentHeadIndex = index;
+            _currentSkin.HeadIndex = index;
             OnHeadChanged?.Invoke(index);
         }
 
         public void ChangeBody(int index)
         {
-            _currentHeadIndex = index;
+            _currentSkin.BodyIndex = index;
             OnBodyChanged?.Invoke(index);
         }
 
-        //TODO: create a struct for the skin data?
-        public (int, int) LoadSkin()
+        public SkinData LoadSkin()
         {
             Debug.Log("Loaded skins data");
-            return (_currentHeadIndex, _currentBodyIndex);
+
+            var data = new SkinData
+            {
+                HeadIndex = _currentSkin.HeadIndex,
+                BodyIndex = _currentSkin.BodyIndex
+            };
+
+            return data;
+        }
+
+        public struct SkinData
+        {
+            public int HeadIndex;
+            public int BodyIndex;
+
+            public SkinData(int headIndex, int bodyIndex)
+            {
+                HeadIndex = headIndex;
+                BodyIndex = bodyIndex;
+            }
         }
     }
 }
