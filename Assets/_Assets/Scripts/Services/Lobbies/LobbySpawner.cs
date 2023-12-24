@@ -1,4 +1,5 @@
-﻿using _Assets.Scripts.Services.Datas;
+﻿using System.Collections;
+using _Assets.Scripts.Services.Datas;
 using Unity.Netcode;
 using UnityEngine;
 using VContainer;
@@ -13,8 +14,6 @@ namespace _Assets.Scripts.Services.Lobbies
         [Inject] private LocalDataLoader _localDataLoader;
         [Inject] private IObjectResolver _objectResolver;
 
-        private void Awake() => NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
-
         public override void OnDestroy()
         {
             base.OnDestroy();
@@ -28,6 +27,8 @@ namespace _Assets.Scripts.Services.Lobbies
         {
             if (IsServer)
             {
+                NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
+
                 var lobbyPlayerData = new LobbyPlayerData
                 {
                     ConnectionId = NetworkManager.Singleton.LocalClientId,

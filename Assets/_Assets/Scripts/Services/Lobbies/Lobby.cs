@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace _Assets.Scripts.Services.Lobbies
 {
+    //TODO: make lobby a network object
+    //TODO: OR spawn character slots
     public class Lobby
     {
         private readonly Dictionary<ulong, LobbyPlayerData> _players = new(8);
@@ -23,6 +25,14 @@ namespace _Assets.Scripts.Services.Lobbies
 
             _players.Add(playerData.ConnectionId, playerData);
             OnPlayerConnected?.Invoke(playerData.ConnectionId);
+        }
+
+        public void ChangeReadyState(ulong connectionId, bool isReady)
+        {
+            var player = _players[connectionId];
+            player.IsReady = isReady;
+            _players[connectionId] = player;
+            Debug.LogError("Changed ready state");
         }
 
         public void RemovePlayer(ulong connectionId)

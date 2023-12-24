@@ -9,18 +9,21 @@ namespace _Assets.Scripts.Services.Datas
     {
         public ulong ConnectionId;
         public string Nickname;
+        public bool IsReady;
         public SkinService.SkinData SkinData;
 
-        public LobbyPlayerData(ulong connectionId, string nickname, SkinService.SkinData skinData)
+        public LobbyPlayerData(ulong connectionId, string nickname, SkinService.SkinData skinData, bool isReady)
         {
             ConnectionId = connectionId;
             Nickname = nickname;
             SkinData = skinData;
+            IsReady = isReady;
         }
 
         public bool Equals(LobbyPlayerData other)
         {
-            return ConnectionId == other.ConnectionId && Nickname == other.Nickname && SkinData.Equals(other.SkinData);
+            return ConnectionId == other.ConnectionId && Nickname == other.Nickname &&
+                   SkinData.Equals(other.SkinData) && IsReady == other.IsReady;
         }
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -29,6 +32,7 @@ namespace _Assets.Scripts.Services.Datas
             serializer.SerializeValue(ref Nickname);
             serializer.SerializeValue(ref SkinData.HatIndex);
             serializer.SerializeValue(ref SkinData.BodyIndex);
+            serializer.SerializeValue(ref IsReady);
         }
 
         public override bool Equals(object obj)
@@ -38,7 +42,7 @@ namespace _Assets.Scripts.Services.Datas
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(ConnectionId, Nickname, SkinData);
+            return HashCode.Combine(ConnectionId, Nickname, SkinData, IsReady);
         }
     }
 }

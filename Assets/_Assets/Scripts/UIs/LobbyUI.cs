@@ -1,5 +1,4 @@
-﻿using System;
-using _Assets.Scripts.Services.Lobbies;
+﻿using _Assets.Scripts.Services.Lobbies;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,12 +11,18 @@ namespace _Assets.Scripts.UIs
     {
         [SerializeField] private Button start, disconnect;
         [SerializeField] private LobbyCharacterTopBar[] lobbyCharactersTopBar;
+        [SerializeField] private GridLayoutGroup characterGrid;
+        [SerializeField] private CharacterSlotUI[] characterSlots;
         [Inject] private Lobby _lobby;
 
         private void Awake()
         {
             _lobby.OnPlayerConnected += UpdateTopBar;
             _lobby.OnPlayerDisconnected += UpdateTopBar;
+
+            _lobby.OnPlayerConnected += UpdateCharacterGrid;
+            _lobby.OnPlayerDisconnected += UpdateCharacterGrid;
+
             NetworkManager.Singleton.OnClientDisconnectCallback += DisconnectServerRpc;
             disconnect.onClick.AddListener(Disconnect);
         }
@@ -74,6 +79,49 @@ namespace _Assets.Scripts.UIs
         {
             lobbyCharactersTopBar[index].SetNickname(nickname);
             lobbyCharactersTopBar[index].gameObject.SetActive(nickname != string.Empty);
+        }
+
+        private void UpdateCharacterGrid(ulong clientId)
+        {
+            if (_lobby.Players.Count > 4)
+            {
+                characterGrid.cellSize = new Vector2(characterGrid.cellSize.x, 290);
+            }
+            else
+            {
+                characterGrid.cellSize = new Vector2(characterGrid.cellSize.x, 580);
+            }
+
+            for (int i = 0; i < characterSlots.Length; i++)
+            {
+                if (i < _lobby.Players.Count)
+                {
+                    characterSlots[i].SetNickname(_lobby.Players[i].Nickname);
+                    characterSlots[i].gameObject.SetActive(true);
+                    UpdateCharacterGridClientRpc(_lobby.Players.Count, i, _lobby.Players[i].Nickname);
+                }
+                else
+                {
+                    characterSlots[i].gameObject.SetActive(false);
+                    UpdateCharacterGridClientRpc(_lobby.Players.Count, i, string.Empty);
+                }
+            }
+        }
+
+        [ClientRpc]
+        private void UpdateCharacterGridClientRpc(int characterCount, int index, string nickname)
+        {
+            if (characterCount > 4)
+            {
+                characterGrid.cellSize = new Vector2(characterGrid.cellSize.x, 290);
+            }
+            else
+            {
+                characterGrid.cellSize = new Vector2(characterGrid.cellSize.x, 580);
+            }
+
+            characterSlots[index].SetNickname(nickname);
+            characterSlots[index].gameObject.SetActive(nickname != string.Empty);
         }
 
         public override void OnNetworkSpawn() => start.gameObject.SetActive(IsServer);
