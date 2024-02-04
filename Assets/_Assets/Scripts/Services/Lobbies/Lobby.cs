@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Assets.Scripts.Services.Datas;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace _Assets.Scripts.Services.Lobbies
@@ -39,6 +40,14 @@ namespace _Assets.Scripts.Services.Lobbies
         {
             _players.Remove(connectionId);
             OnPlayerDisconnected?.Invoke(connectionId);
+        }
+
+        public void Kick(ulong connectionId)
+        {
+            _players.Remove(connectionId);
+            NetworkManager.Singleton.DisconnectClient(connectionId);
+            OnPlayerDisconnected?.Invoke(connectionId);
+            Debug.LogError("KICK");
         }
     }
 }

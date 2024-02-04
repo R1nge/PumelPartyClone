@@ -83,14 +83,7 @@ namespace _Assets.Scripts.UIs
 
         private void UpdateCharacterGrid(ulong clientId)
         {
-            if (_lobby.Players.Count > 4)
-            {
-                characterGrid.cellSize = new Vector2(characterGrid.cellSize.x, 290);
-            }
-            else
-            {
-                characterGrid.cellSize = new Vector2(characterGrid.cellSize.x, 580);
-            }
+            ChangeCellSize(_lobby.Players.Count);
 
             for (int i = 0; i < characterSlots.Length; i++)
             {
@@ -98,20 +91,60 @@ namespace _Assets.Scripts.UIs
                 {
                     characterSlots[i].SetNickname(_lobby.Players[i].Nickname);
                     characterSlots[i].gameObject.SetActive(true);
-                    UpdateCharacterGridClientRpc(_lobby.Players.Count, i, _lobby.Players[i].Nickname);
+                    UpdateCharacterGridClientRpc(_lobby.Players.Count, i, _lobby.Players[i].Nickname,
+                        _lobby.Players[i].ConnectionId);
                 }
                 else
                 {
                     characterSlots[i].gameObject.SetActive(false);
-                    UpdateCharacterGridClientRpc(_lobby.Players.Count, i, string.Empty);
+                    UpdateCharacterGridClientRpc(_lobby.Players.Count, i, string.Empty, _lobby.Players[i].ConnectionId);
                 }
             }
         }
 
         [ClientRpc]
-        private void UpdateCharacterGridClientRpc(int characterCount, int index, string nickname)
+        private void UpdateCharacterGridClientRpc(int playerCount, int index, string nickname,
+            ulong senderConnectionId)
         {
-            if (characterCount > 4)
+            ChangeCellSize(playerCount);
+
+            characterSlots[index].SetNickname(nickname);
+            characterSlots[index].gameObject.SetActive(nickname != string.Empty);
+
+            if (NetworkManager.LocalClientId == senderConnectionId)
+            {
+                if (IsServer || IsHost)
+                {
+                    if (index == 0)
+                    {
+                        characterSlots[index].ShowButtons();
+                    }
+                    else
+                    {
+                        characterSlots[index].ShowServerButtons();
+                    }
+                }
+                else
+                {
+                    characterSlots[index].ShowButtons();
+                }
+            }
+            else
+            {
+                if (IsServer || IsHost)
+                {
+                    characterSlots[index].ShowServerButtons();
+                }
+                else
+                {
+                    characterSlots[index].HideButtons();
+                }
+            }
+        }
+
+        private void ChangeCellSize(int playerCount)
+        {
+            if (playerCount > 4)
             {
                 characterGrid.cellSize = new Vector2(characterGrid.cellSize.x, 290);
             }
@@ -119,9 +152,6 @@ namespace _Assets.Scripts.UIs
             {
                 characterGrid.cellSize = new Vector2(characterGrid.cellSize.x, 580);
             }
-
-            characterSlots[index].SetNickname(nickname);
-            characterSlots[index].gameObject.SetActive(nickname != string.Empty);
         }
 
         public override void OnNetworkSpawn() => start.gameObject.SetActive(IsServer);

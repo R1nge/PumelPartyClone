@@ -8,9 +8,15 @@ using VContainer;
 
 namespace _Assets.Scripts.UIs
 {
+    //TODO: make character slot a networked object and place on a separate networked canvas
     public class CharacterSlotUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI nicknameText;
+
+        [Header("Server buttons")]
+        [SerializeField] private GameObject serverButtons;
+
+        [SerializeField] private Button kick;
 
         [Header("Main menu")]
         [SerializeField] private GameObject mainMenu;
@@ -40,14 +46,48 @@ namespace _Assets.Scripts.UIs
             ready.onClick.AddListener(ChangeReadyState);
         }
 
+        private void Start()
+        {
+            kick.onClick.AddListener(() => Kick(NetworkManager.Singleton.LocalClientId));
+        }
+
         private void ChangeReadyState()
         {
             _lobby.ChangeReadyState(NetworkManager.Singleton.LocalClientId, true);
         }
 
+        private void Kick(ulong clientId)
+        {
+            _lobby.Kick(clientId);
+        }
+
         public void SetNickname(string nickname)
         {
             nicknameText.text = nickname;
+        }
+
+        public void ShowServerButtons()
+        {
+            serverButtons.SetActive(true);
+        }
+
+        public void HideServerButtons()
+        {
+            serverButtons.SetActive(false);
+        }
+
+        public void ShowButtons()
+        {
+            mainMenu.SetActive(true);
+            customizationMenu.SetActive(false);
+            appearanceMenu.SetActive(false);
+        }
+
+        public void HideButtons()
+        {
+            mainMenu.SetActive(false);
+            customizationMenu.SetActive(false);
+            appearanceMenu.SetActive(false);
         }
     }
 }
